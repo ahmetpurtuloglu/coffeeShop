@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="main-background">
+    <nav th:if="${user != null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a th:if="${user.isWorker()}" href="/dashboard/worker" class="menu-item">
+            Worker Dashboard
+        </a>
+        <a th:if="${user.isOwner()}" href="/dashboard/owner" class="menu-item">
+            Owner Dashboard
+        </a>
+        <a href="/logout" class="menu-item">
+            Log Out
+        </a>
+    </nav>
+    <nav th:if="${user == null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a href="/login" class="menu-item">
+            Log In
+        </a>
+    </nav>
+<div class="background">
+    <h1 class="table-big-title">All Time Statistics</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="table-text-antiquewhite">Total Orders Taken</th>
+                <th class="table-text-antiquewhite">Total Orders Delivered</th>
+                <th class="table-text-antiquewhite">Total Orders Not Delivered</th>
+                <th class="table-text-antiquewhite">Average Delivery Time</th>
+                <th class="table-text-antiquewhite">Total Earned</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="table-text-black"><span th:text="${report.getTotalOrdersTaken()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getTotalOrdersDelivered()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getTotalOrdersNotDelivered()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getAvgDeliveryTime()}"></span></th>
+                <th class="table-text-black"><span th:text="'$'+${report.getTotalEarned()}"></span></th>
+            </tr>
+        </tbody>
+    </table>
+
+</div>    
+    
+<div class="background">
+    <h1 class ="table-big-title" >Past Year Reports</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="table-text-antiquewhite">Total Orders Taken</th>
+                <th class="table-text-antiquewhite">Total Orders Delivered</th>
+                <th class="table-text-antiquewhite">Total Orders Not Delivered</th>
+                <th class="table-text-antiquewhite">Average Delivery Time</th>
+                <th class="table-text-antiquewhite">Total Earned</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="table-text-black"><span th:text="${report.getThisYearOrdersTaken()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getThisYearOrdersDelivered()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getThisYearOrdersNotDelivered()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getThisYearAvgDeliveryTime()}"></span></th>
+                <th class="table-text-black"><span th:text="'$'+${report.getThisYearTotalEarned()}"></span></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    
+<div class="background">
+    <h1 class="table-big-title">Past Month Reports</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="table-text-antiquewhite">Total Orders Taken</th>
+                <th class="table-text-antiquewhite">Total Orders Delivered</th>
+                <th class="table-text-antiquewhite">Total Orders Not Delivered</th>
+                <th class="table-text-antiquewhite">Average Delivery Time</th>
+                <th class="table-text-antiquewhite">Total Earned</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="table-text-black"><span th:text="${report.getThisMonthOrdersTaken()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getThisMonthOrdersDelivered()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getThisMonthOrdersNotDelivered()}"></span></th>
+                <th class="table-text-black"><span th:text="${report.getThisMonthAvgDeliveryTime()}"></span></th>
+                <th class="table-text-black"><span th:text="'$'+${report.getThisMonthTotalEarned()}"></span></th>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+<div class="background">
+    <button class="btn" onclick="print()">Export to PDF</button>
+</div>
+    
+</body>
+</html>

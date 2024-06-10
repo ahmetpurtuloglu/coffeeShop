@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="main-background">
+    <nav th:if="${user != null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a th:if="${user.isWorker()}" href="/dashboard/worker" class="menu-item">
+            Worker Dashboard
+        </a>
+        <a th:if="${user.isOwner()}" href="/dashboard/owner" class="menu-item">
+            Owner Dashboard
+        </a>
+        <a href="/logout" class="menu-item">
+            Log Out
+        </a>
+    </nav>
+    <nav th:if="${user == null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a href="/register" class="menu-item">
+            Register
+        </a>
+        <a href="/login" class="menu-item">
+            Log In
+        </a>
+    </nav>
+    <div class="background">
+        <div>
+        <table th:if="${sent_order} != true">
+            <thead>
+                <tr>
+                    <th class="table-text-antiquewhite">Name</th>
+                    <th class="table-text-antiquewhite">Price</th>
+                    <th class="table-text-antiquewhite">Quantity</th>
+                    <th class="table-text-antiquewhite">Total</th>
+                    <th class="table-text-antiquewhite">Add</th>
+                    <th class="table-text-antiquewhite">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product: ${products}" >
+                    <th class="table-text-white" th:text="${product.getName()}"></th>
+                    <th class="table-text-white" th:text="'$'+${product.getPrice()}"></th>
+                    <th class="table-text-white" th:text="${product.getCount()}"></th>
+                    <th class="table-text-white" th:text="'$'+${product.getTotalPrice()}"></th>
+                    <th><a th:href="'/cart?add_product='+${product.getName()}" class="btn-secondary" style="background-color:white;color:black; padding: 8px">+</a></th>
+                    <th><a th:href="'/cart?remove_product='+${product.getName()}" class="btn-secondary" style="background-color:white;color:black;padding: 8px;">-</a></th>
+                </tr>
+            </tbody>
+        </table>
+        <h1  th:if="${sent_order}" style="color: antiquewhite;font-size:50px;padding: 30px;text-align: center;">Successfully sent order!</h1>
+        <div style="padding: 40px; display: flex; justify-content: center; ">
+            <a th:if="${sent_order} != true" href="/" class="btn-secondary">Add More Products</a>
+        </div>
+        </div>
+    </div>
+    <div style="display: flex; width: 100%; justify-content: center;">
+        <a th:if="${sent_order} != true" href="/cart?send_order=true" class="btn-secondary">Send Order</a>
+    </div>
+
+</body>
+</html>

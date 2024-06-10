@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="main-background">
+    <nav th:if="${user != null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a th:if="${user.isWorker()}" href="/dashboard/worker" class="menu-item">
+            Worker Dashboard
+        </a>
+        <a th:if="${user.isOwner()}" href="/dashboard/owner" class="menu-item">
+            Owner Dashboard
+        </a>
+        <a href="/logout" class="menu-item">
+            Log Out
+        </a>
+    </nav>
+    <nav th:if="${user == null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a href="/login" class="menu-item">
+            Log In
+        </a>
+    </nav>
+    <div style="text-align: center;">
+        <img th:src="${category.getImageLink()}" style="width: 45%;border-radius: 450px;text-align: center;padding: 50px;">
+    </div>
+    <h1 th:text="'Products of: '+${category.getName()}" class="table-big-title" style="color: antiquewhite;"></h1>
+    <div class="background">
+        
+    <table>
+        <thead>
+            <tr>
+                <th class="editproducts-w10"><b>Name</b></th>
+                <th class="editproducts-w20"><b>Description</b></th>
+                <th class="editproducts-w10"><b>Price</b></th>
+                <th class="editproducts-w10"><b>Grams</b></th>
+                <th class="editproducts-w10"><b>Calories</b></th>
+                <th class="editproducts-w20"><b>Image Link</b></th>
+                <th class="editproducts-w10"><b>Edit Product</b></th>
+                <th class="editproducts-w10"><b>Remove Product</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product: ${products}">
+                <form method="post" style="display: table-row">
+                    <th class="editproducts-w10"><span><p th:text="${product.getName()}"></p><input type="hidden" name="name" th:value="${product.getName()}"></th>
+                    <th class="editproducts-w20"><input type="text" name="description" placeholder="Product Description..." th:value="${product.getDescription()}"></th>
+                    <th class="editproducts-w10"><input type="number" min="0" step="0.01" name="price" placeholder="Product Price..." th:value="${product.getPrice()}"></th>
+                    <th class="editproducts-w10"><input type="number" step="1" min="0" name="grams" placeholder="Product Grams..." th:value="${product.getGrams()}"></th>
+                    <th class="editproducts-w10"><input type="number" step="1" min="0" name="calories" placeholder="Product Calories..." th:value="${product.getCalories()}"></th>
+                    <th class="editproducts-w20"><input type="text" name="imageLink" placeholder="Product Image URL..." th:value="${product.getImageLink()}"></th>
+                    <th class="editproducts-w10"><input type="submit" name="edit_product" class="btn-secondary" value="Edit"></th>
+                    <th class="editproducts-w10">
+                    <input type="submit" name="remove_product" class="btn-secondary" value="Delete">
+                    </th>
+                </form>
+            </tr>
+            <tr>
+                <form method="post">
+                    <th><input type="text" name="name" placeholder="Product Name..."></th>
+                    <th><input type="text" name="description" placeholder="Product Description..."></th>
+                    <th><input type="number" min="0" step="0.01" name="price" placeholder="Product Price..." ></th>
+                    <th><input type="number" step="1" min="0" name="grams" placeholder="Product Grams..."></th>
+                    <th><input type="number" step="1" min="0" name="calories" placeholder="Product Calories..."></th>
+                    <th><input type="text" step="1" min="0" name="imageLink" placeholder="Product Image URL..."></th>
+                    <th><input type="submit" name="add_product" class="btn-secondary" value="Add Product"></th>
+                <th>
+                    X
+                </th>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="background">
+    <div>
+        <h1 class="table-big-title"style="text-align: center;">Add New Category</h1>
+        <form method="post">
+            <input class="text-field" type="text" name="categoryName" placeholder="Child Category Name...">
+            <input class="text-field" type="text" name="imageLink" placeholder="Child Category Image URL...">
+            <input type="submit" name="add_category" value="Add Category">
+        </form>
+    </div>
+    </div>
+</body>
+</html>

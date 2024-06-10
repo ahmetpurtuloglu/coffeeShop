@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="main-background">
+    <nav th:if="${user != null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a th:if="${user.isWorker()}" href="/dashboard/worker" class="menu-item">
+            Worker Dashboard
+        </a>
+        <a th:if="${user.isOwner()}" href="/dashboard/owner" class="menu-item">
+            Owner Dashboard
+        </a>
+        <a href="/logout" class="menu-item">
+            Log Out
+        </a>
+    </nav>
+    <nav th:if="${user == null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a href="/login" class="menu-item">
+            Log In
+        </a>
+    </nav>
+    <div class="background" th:each="order: ${orders}">
+    <div>
+    <h3 th:text="'Order #' + ${order.getId()}" style="text-align: center;"></h3>
+    <h4 th:if="${order.getUser() != null}" th:text="'Ordered By: ' + ${order.getUser().getUsername()}" style="text-align: center;"></h4>
+    <h4 th:if="${order.getUser() == null}" style="text-align: center;">Ordered By: Not Logged In</h4>
+    <h4 th:text="'Date Taken:' + ${order.getDateReceived()}" style="text-align: center;"></h4>
+    <h4 th:text="'Delivered:' + ${order.isDelivered()}" style="text-align: center;"></h4>
+    <h4 th:if="${order.isDelivered()}" th:text="'Date Delivered:' + ${order.getDateDelivered()}" style="text-align: center;"></h4>
+    <h4 th:if="${order.isDelivered()}" th:text="'Delivery Time:' + ${order.getDeliveryTime()}" style="text-align: center;"></h4>
+    <form method="POST" style="display:flex; justify-content: center;">
+        <input type="hidden" name="id" th:value="${order.getId()}">
+        <input th:if="${order.isDelivered() == false}" type="submit" name="deliver" class="btn-secondary" value="Deliver">
+        <input th:if="${order.isDelivered()}" type="submit" name="deliver" class="btn-secondary" value="Undo Delivery">
+    </form>
+    <div class="background-secondary">
+        <table>
+            <thead>
+                <tr>
+                    <th class="table-text-brown">Name</th>
+                    <th class="table-text-brown">Price</th>
+                    <th class="table-text-brown">Quantity</th>
+                    <th class="table-text-brown">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product: ${order.getProducts()}">
+                    <th class="table-text-black" th:text="${product.getName()}"></th>
+                    <th class="table-text-black" th:text="'$'+${product.getPrice()}"></th>
+                    <th class="table-text-black" th:text="${product.getCount()}"></th>
+                    <th class="table-text-black" th:text="'$'+${product.getTotalPrice()}"></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+</body>
+</html>

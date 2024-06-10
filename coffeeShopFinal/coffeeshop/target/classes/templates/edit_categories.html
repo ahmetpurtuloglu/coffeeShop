@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="main-background" >
+    <nav th:if="${user != null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a th:if="${user.isWorker()}" href="/dashboard/worker" class="menu-item">
+            Worker Dashboard
+        </a>
+        <a th:if="${user.isOwner()}" href="/dashboard/owner" class="menu-item">
+            Owner Dashboard
+        </a>
+        <a href="/logout" class="menu-item">
+            Log Out
+        </a>
+    </nav>
+    <nav th:if="${user == null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a href="/login" class="menu-item">
+            Log In
+        </a>
+    </nav>
+    <div style="text-align: center;">
+        <img th:src="${category.getImageLink()}" style="width: 45%;border-radius: 450px;text-align: center;padding: 50px;">
+    </div>
+    
+    <div class="background">
+    <div>
+        <h1 class="table-big-title"th:text="'Categories: '+${category.getName()}"></h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="table-text-antiquewhite">Name</th>
+                <th class="table-text-antiquewhite">Parent Category</th>
+                <th class="table-text-antiquewhite">Remove Category</th>
+                <th class="table-text-antiquewhite">Expand</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="categoryTree: ${categoryTrees}">
+                <form method="post">
+                <th th:text="${categoryTree.getData().getName()}"></th>
+                <th th:text="${categoryTree.getParent().getData().getName()}"></th>
+                <th>
+                    <input type="hidden" name="categoryName" class="btn-secondary" th:value="${categoryTree.getData().getName()}">
+                    <input type="hidden" name="imageLink" class="btn-secondary" th:value="${categoryTree.getData().getImageLink()}">
+                    <input type="submit" name="delete_category" class="btn-secondary" value="Delete">
+                </th>
+                <th>
+                <a th:if="${user.isWorker()}" th:href="'/dashboard/worker/edit-categories?category='+${categoryTree.getData().getName()}" class="btn-secondary">Expand</a>
+                <a th:if="${user.isOwner()}" th:href="'/dashboard/owner/edit-categories?category='+${categoryTree.getData().getName()}" class="btn-secondary">Expand</a>
+                </th>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+    <br><br><br>
+    <div class="background">
+    <div>
+    <h1 style="color: darkred; text-align: center;padding-bottom: 10px;">Add New Subcategory</h1>
+    <form method="post">
+        <input class="text-field" type="text" name="categoryName" placeholder="Child Category Name...">
+        <input class="text-field"  type="text" name="imageLink" placeholder="Child Category Image URL...">
+        <input class="btn-secondary" type="submit" name="add_category" value="Add Category">
+    </form>
+
+</div>
+
+    </div>
+    
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="main-background">
+    <nav th:if="${user != null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a th:if="${user.isWorker()}" href="/dashboard/worker" class="menu-item">
+            Worker Dashboard
+        </a>
+        <a th:if="${user.isOwner()}" href="/dashboard/owner" class="menu-item">
+            Owner Dashboard
+        </a>
+        <a href="/logout" class="menu-item">
+            Log Out
+        </a>
+    </nav>
+    <nav th:if="${user == null}">
+        <a href="/" class="menu-item">
+            Home
+        </a>
+        <a href="/cart" class="menu-item" th:text="'Cart ('+${cart.totalItemsInCart()}+')'">
+            Cart
+        </a>
+        <a href="/login" class="menu-item">
+            Log In
+        </a>
+    </nav>
+    <div class="big-title-fleximsi">
+        <h1 class="big-title-background" style="padding: 20px;">Owner Dashboard</h1>
+    </div>
+    <h1 class="logged-in-text" th:text="'Logged in as: '+${user.getUsername()}">Username</h1>
+    <div style="text-align: center;"id="nav-btns">
+        <a href="/dashboard/owner/manage-orders" class="btn-secondary">Manage Orders</a>
+        <a href="/dashboard/owner/edit-categories" class="btn-secondary">Edit Categories</a>
+        <a href="/dashboard/owner/view-reports" class="btn-secondary">View Reports</a>
+    </div>
+</body>
+</html>

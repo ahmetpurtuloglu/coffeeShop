@@ -1,0 +1,232 @@
+html{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+body{
+    margin: 0px;
+}
+
+.menu-item{
+    text-decoration: none;
+    color: white;
+    background-color: brown;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 0px 5px;
+}
+
+.btn{
+    text-decoration: none;
+    color: brown;
+    background-color:antiquewhite;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 0px 5px;
+}
+
+.btn-primary{
+    color: white !important;
+    background-color: blue !important;
+}
+.btn-secondary{
+    text-align: center;
+    background-color: antiquewhite;
+    color: brown;
+    font-size: large; 
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+nav{
+    padding: 20px 0px;
+    text-align: center;
+    height: 24px;
+    background-color: antiquewhite;
+}
+
+.compensate-menu{
+    min-height: calc(100vh - 64px) !important;
+}
+
+.hero{
+    display: flex;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-section{
+    width: 50%;
+}
+
+.hero-image{
+    background-color: black;
+    min-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero-details{
+    background-color: black;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero-details-content{
+    background-color: rgb(87, 87, 87, 0.8);
+    padding: 20px;
+    border-radius: 7px;
+}
+
+.hero-content{
+    margin-left: 20px;
+}
+
+.table-description{
+    width:160px;
+    padding: 20px;
+    color: black
+
+}
+.table-description-secondary{
+    width:160px;
+    padding: 20px;
+    color: white;
+
+}
+.background{
+    background-color: cadetblue;
+    border-radius: 30px;
+    padding: 30px;
+    margin: 3%;
+    display: flex;
+    justify-content: center;
+
+}
+.login-background{
+    width: 50%;
+     text-align: center;
+     height: 50%;
+     background-color: cadetblue;
+     border-radius: 40px;
+     margin-top: 10%
+}
+.login-text-field{
+    width: 330px;
+    height: 33px;
+    border-width: 8px; 
+    border-color:brown;
+}
+.login-button{
+    width: 200px;
+    height: 40px;
+    text-align:-webkit-center;
+    border-width: 6px;
+    border-color: brown;
+}
+.login-title{
+    text-align:center;
+    padding-top: 50px
+    ;font-size: 60px;
+    color: darkred;
+}
+.logged-in-text{
+    color: antiquewhite;
+    font-size:30px;
+    padding: 30px;
+    text-align: center;
+}
+.main-background{
+    background-color: brown;
+}
+.background-secondary{
+    background-color: antiquewhite;
+    border-radius: 30px;
+    padding: 30px;
+    margin: 3%;
+    display: flex;
+    justify-content: center;
+}
+.table-text-antiquewhite{
+    width:160px;
+    padding: 20px;
+    color: antiquewhite;
+}
+.table-text-white{
+    width:160px;
+    padding: 20px;
+    color: white;
+
+}
+.table-text-black{
+    width:160px;
+    padding: 20px;
+    color: black;
+
+}
+.table-text-brown{
+    width:160px;
+    padding: 20px;
+    color: brown;
+}
+.table-big-title{
+    text-align: center;
+    color: darkred;
+
+}
+.table-category-title-antiquewhite{
+    width:160px;
+    padding: 20px;
+    color: antiquewhite;
+}
+.title{
+    color:antiquewhite;
+    padding: 10px;
+    font-size: 60px;
+}
+.big-title-background{
+    color: brown;
+    background-color: cadetblue;
+    font-size: 60px;
+    text-align: center;
+    color: antiquewhite;
+    border-radius: 10px;
+    text-align: center;
+}
+.big-title-fleximsi{
+    width: 50%;
+    padding-left: 25%;
+    text-align: center;
+}
+.text-product-description{
+    color:white; 
+    font-style: italic; 
+    font-weight: bold;
+}
+.text-field{
+    width: 250px;
+    height: 35px;
+    border-radius: 8px;
+    background-color: antiquewhite;
+}
+
+.editproducts-w10{
+    width:10%;
+     color:brown;
+}
+.editproducts-w20{
+    width:20%;
+     color: brown;
+}
+#nav-btns{
+    padding: 25px;
+    margin: 25px;
+}
